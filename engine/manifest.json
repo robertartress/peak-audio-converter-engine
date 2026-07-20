@@ -1,0 +1,197 @@
+{
+  "buildId": "peak-audio-converter-ffmpeg-5.1.10-v3-no-aac",
+  "dependencies": [
+    {
+      "name": "FFmpeg",
+      "version": "5.1.10",
+      "url": "https://ffmpeg.org/releases/ffmpeg-5.1.10.tar.xz",
+      "sha256": "392306d6fc45dab0e9e0ea55381e071842e83a2fb31d320aeda40477a7766293",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "name": "libsoxr",
+      "version": "0.1.3",
+      "url": "https://downloads.sourceforge.net/project/soxr/soxr-0.1.3-Source.tar.xz",
+      "sha256": "b111c15fdc8c029989330ff559184198c161100a59312f5dc19ddeb9b5a15889",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "name": "LAME",
+      "version": "3.100",
+      "url": "https://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz",
+      "sha256": "ddfe36cab873794038ae2c1210557ad34857a4b6bdc515785d1da9e175b1da1e",
+      "license": "LGPL-2.0-or-later"
+    },
+    {
+      "name": "libogg",
+      "version": "1.3.5",
+      "url": "https://downloads.xiph.org/releases/ogg/libogg-1.3.5.tar.xz",
+      "sha256": "c4d91be36fc8e54deae7575241e03f4211eb102afb3fc0775fbbc1b740016705",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "libvorbis",
+      "version": "1.3.7",
+      "url": "https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz",
+      "sha256": "b33cc4934322bcbf6efcbacf49e3ca01aadbea4114ec9589d1b1e9d20f72954b",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "opus",
+      "version": "1.5.2",
+      "url": "https://downloads.xiph.org/releases/opus/opus-1.5.2.tar.gz",
+      "sha256": "65c1d2f78b9f2fb20082c38cbe47c951ad5839345876e46941612ee87f9a7ce1",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "Emscripten",
+      "version": "3.1.40",
+      "url": "docker.io/emscripten/emsdk:3.1.40",
+      "license": "MIT AND NCSA"
+    },
+    {
+      "name": "ffmpeg.wasm bindings",
+      "version": "v12.15 (71aa99d37c02a7b4c435275ca9ef50e612f6efa1)",
+      "url": "https://github.com/ffmpegwasm/ffmpeg.wasm/archive/71aa99d37c02a7b4c435275ca9ef50e612f6efa1.tar.gz",
+      "sha256": "53c5842f160cece0e39345876f9483b56aa84b966637ff6f624353a0fa884219",
+      "license": "MIT"
+    }
+  ],
+  "patches": [
+    {
+      "target": "libvorbis",
+      "description": "Remove -mno-ieee-fp from the autotools configure script; emscripten clang rejects this flag.",
+      "command": "sed -i 's/-mno-ieee-fp//g' configure"
+    },
+    {
+      "target": "opus",
+      "description": "Build fixed-point with x86 SIMD disabled; emscripten requires -msimd128 for SSE/AVX intrinsics.",
+      "cmakeOptions": [
+        "-DOPUS_FIXED_POINT=ON",
+        "-DOPUS_X86_MAY_HAVE_SSE=OFF",
+        "-DOPUS_X86_MAY_HAVE_SSE2=OFF",
+        "-DOPUS_X86_MAY_HAVE_SSE4_1=OFF",
+        "-DOPUS_X86_MAY_HAVE_AVX=OFF",
+        "-DOPUS_X86_MAY_HAVE_AVX2=OFF"
+      ]
+    }
+  ],
+  "configureFlags": [
+    "--target-os=none",
+    "--arch=x86_32",
+    "--enable-cross-compile",
+    "--nm=emnm",
+    "--ar=emar",
+    "--ranlib=emranlib",
+    "--cc=emcc",
+    "--cxx=em++",
+    "--objcc=emcc",
+    "--dep-cc=emcc",
+    "--extra-cflags=-I/opt/include -O3",
+    "--extra-cxxflags=-I/opt/include -O3",
+    "--extra-ldflags=-L/opt/lib -O3",
+    "--disable-everything",
+    "--disable-autodetect",
+    "--disable-programs",
+    "--disable-doc",
+    "--disable-debug",
+    "--disable-asm",
+    "--disable-stripping",
+    "--disable-runtime-cpudetect",
+    "--disable-network",
+    "--disable-avdevice",
+    "--disable-postproc",
+    "--disable-swscale",
+    "--disable-gpl",
+    "--disable-nonfree",
+    "--disable-pthreads",
+    "--disable-w32threads",
+    "--disable-os2threads",
+    "--enable-small",
+    "--enable-avcodec",
+    "--enable-avformat",
+    "--enable-avfilter",
+    "--enable-swresample",
+    "--enable-libsoxr",
+    "--enable-libmp3lame",
+    "--enable-libopus",
+    "--enable-libvorbis",
+    "--enable-protocol=file",
+    "--enable-demuxer=aiff,caf,flac,mov,mp3,ogg,wav,matroska",
+    "--enable-muxer=flac,mp3,null,wav,ogg,opus,mp4,ipod,webm",
+    "--enable-decoder=alac,flac,mp3,mp3float,opus,vorbis",
+    "--enable-decoder=pcm_s8,pcm_u8,pcm_s16le,pcm_s16be,pcm_u16le,pcm_u16be",
+    "--enable-decoder=pcm_s24le,pcm_s24be,pcm_u24le,pcm_u24be",
+    "--enable-decoder=pcm_s32le,pcm_s32be,pcm_u32le,pcm_u32be",
+    "--enable-decoder=pcm_f32le,pcm_f32be,pcm_f64le,pcm_f64be,pcm_alaw,pcm_mulaw",
+    "--enable-encoder=flac,libmp3lame,pcm_s16le,pcm_s24le,pcm_f32le,alac,libopus,libvorbis",
+    "--enable-parser=flac,mpegaudio,opus,vorbis",
+    "--enable-filter=abuffer,abuffersink,aformat,anull,aresample,volume"
+  ],
+  "emscriptenOptions": [
+    "-O3",
+    "-msimd128",
+    "-sENVIRONMENT=worker",
+    "-sEMULATE_FUNCTION_POINTER_CASTS",
+    "-sALLOW_MEMORY_GROWTH",
+    "-sMAXIMUM_MEMORY=2GB",
+    "-lworkerfs.js"
+  ],
+  "demuxers": [
+    "aiff",
+    "caf",
+    "flac",
+    "mov",
+    "mp3",
+    "ogg",
+    "wav",
+    "matroska"
+  ],
+  "muxers": [
+    "flac",
+    "mp3",
+    "null",
+    "wav",
+    "ogg",
+    "opus",
+    "mp4",
+    "ipod",
+    "webm"
+  ],
+  "decoders": [
+    "alac",
+    "flac",
+    "mp3",
+    "mp3float",
+    "opus",
+    "vorbis",
+    "pcm_*"
+  ],
+  "encoders": [
+    "flac",
+    "libmp3lame",
+    "pcm_s16le",
+    "pcm_s24le",
+    "pcm_f32le",
+    "alac",
+    "libopus",
+    "libvorbis"
+  ],
+  "filters": [
+    "abuffer",
+    "abuffersink",
+    "aformat",
+    "anull",
+    "aresample",
+    "volume"
+  ],
+  "bitstreamFilters": [],
+  "protocols": [
+    "file"
+  ],
+  "buildDate": "2026-07-20T13:04:32.175Z",
+  "artifacts": {
+    "ffmpeg-core.js": "aa18b7204bc80c0e1fa7680b5c44009dd527a2068496ddc70a438b0fe11af944",
+    "ffmpeg-core.wasm": "77dc6a1f972b6c47883dce27442d0b512e59c3755c8daa41b46ce0fb2e242761"
+  }
+}

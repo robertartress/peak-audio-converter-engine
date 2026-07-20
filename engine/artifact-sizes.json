@@ -1,0 +1,20 @@
+{
+  "measuredAt": "2026-07-20T13:04:32.232Z",
+  "assets": {
+    "ffmpeg-core.js": {
+      "rawBytes": 85118,
+      "gzipBytes": 23051,
+      "brotliBytes": 20369
+    },
+    "ffmpeg-core.wasm": {
+      "rawBytes": 2579955,
+      "gzipBytes": 1143320,
+      "brotliBytes": 898485
+    }
+  },
+  "total": {
+    "rawBytes": 2665073,
+    "gzipBytes": 1166371,
+    "brotliBytes": 918854
+  }
+}

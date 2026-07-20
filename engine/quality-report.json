@@ -1,0 +1,109 @@
+{
+  "buildId": "peak-audio-converter-ffmpeg-5.1.10-v1-b3ce404d",
+  "measuredAt": "2026-07-13T20:32:22.347Z",
+  "environment": {
+    "browser": "Playwright Chromium 129.0.6668.29",
+    "nativeFfmpeg": "ffmpeg version 7.0 Copyright (c) 2000-2024 the FFmpeg developers",
+    "architecture": "x64",
+    "platform": "darwin"
+  },
+  "floatSrc44100": {
+    "wasm": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "pcm_f32le",
+          "sample_rate": "44100",
+          "channels": 1,
+          "bits_per_sample": 32,
+          "bit_rate": "1411200"
+        }
+      ],
+      "format": {
+        "duration": "2.000000",
+        "bit_rate": "1411656"
+      }
+    },
+    "native": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "pcm_f32le",
+          "sample_rate": "44100",
+          "channels": 1,
+          "bits_per_sample": 32,
+          "bit_rate": "1411200"
+        }
+      ],
+      "format": {
+        "duration": "2.000000",
+        "bit_rate": "1411568"
+      }
+    },
+    "residual": {
+      "framesCompared": 88200,
+      "maxAbsolute": 0,
+      "rms": 0
+    }
+  },
+  "dither24To16SameRate": {
+    "output": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "bit_rate": "768000"
+        }
+      ],
+      "format": {
+        "duration": "2.000000",
+        "bit_rate": "768312"
+      }
+    },
+    "sampleCount": 96000,
+    "errorMean": 2.3206075032552082e-8,
+    "errorRms": 0.00001520176228538839,
+    "errorRmsLsb16": 0.49813134656760677,
+    "samplesDifferingFromUnditheredRounding": 23821
+  },
+  "flac24": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "flac",
+        "sample_rate": "44100",
+        "channels": 2,
+        "bits_per_sample": 0,
+        "bits_per_raw_sample": "24"
+      }
+    ],
+    "format": {
+      "duration": "2.000000",
+      "bit_rate": "130840"
+    }
+  },
+  "mp3_320k": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2,
+        "bits_per_sample": 0,
+        "bit_rate": "320000"
+      }
+    ],
+    "format": {
+      "duration": "2.037551",
+      "bit_rate": "324275"
+    }
+  }
+}
